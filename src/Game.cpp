@@ -76,6 +76,8 @@ void Game::Render()
         return;
     }
 
+    float time{ static_cast<float>(m_timer.GetTotalSeconds()) };
+
     // Prepare the command list to render a new frame.
     m_deviceResources->Prepare();
     Clear();
@@ -93,7 +95,7 @@ void Game::Render()
         m_screenPos,
         nullptr,
         Colors::White,
-        0.f,
+        cosf(time) * 4.f,
         m_origin
     );
     m_spriteBatch->End();

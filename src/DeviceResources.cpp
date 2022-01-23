@@ -376,6 +376,7 @@ void DeviceResources::CreateWindowSizeDependentResources()
         depthOptimizedClearValue.DepthStencil.Depth = 1.0f;
         depthOptimizedClearValue.DepthStencil.Stencil = 0;
 
+        m_depthStencil = nullptr;
         ThrowIfFailed(m_d3dDevice->CreateCommittedResource(
             &depthHeapProperties,
             D3D12_HEAP_FLAG_NONE,
