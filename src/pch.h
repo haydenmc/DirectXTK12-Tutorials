@@ -16,6 +16,31 @@
     #include <dxgidebug.h>
 #endif
 
+// DirectXTK12
+#include <DirectXTK12/BufferHelpers.h>
+#include <DirectXTK12/CommonStates.h>
+#include <DirectXTK12/DDSTextureLoader.h>
+#include <DirectXTK12/DescriptorHeap.h>
+#include <DirectXTK12/DirectXHelpers.h>
+#include <DirectXTK12/EffectPipelineStateDescription.h>
+#include <DirectXTK12/Effects.h>
+#include <DirectXTK12/GamePad.h>
+#include <DirectXTK12/GeometricPrimitive.h>
+#include <DirectXTK12/GraphicsMemory.h>
+#include <DirectXTK12/Keyboard.h>
+#include <DirectXTK12/Model.h>
+#include <DirectXTK12/Mouse.h>
+#include <DirectXTK12/PostProcess.h>
+#include <DirectXTK12/PrimitiveBatch.h>
+#include <DirectXTK12/RenderTargetState.h>
+#include <DirectXTK12/ResourceUploadBatch.h>
+#include <DirectXTK12/ScreenGrab.h>
+#include <DirectXTK12/SimpleMath.h>
+#include <DirectXTK12/SpriteBatch.h>
+#include <DirectXTK12/SpriteFont.h>
+#include <DirectXTK12/VertexTypes.h>
+#include <DirectXTK12/WICTextureLoader.h>
+
 // Instrumenting library
 #include <pix.h>
 

@@ -47,12 +47,23 @@ private:
 	void CreateDeviceDependentResources();
 	void CreateWindowSizeDependentResources();
 
-	// Device resources.
-	std::unique_ptr<DX::DeviceResources>        m_deviceResources;
+	// DirectX Resources
+	std::unique_ptr<DX::DeviceResources> m_deviceResources;
+	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
+	std::unique_ptr<DirectX::DescriptorHeap> m_resourceDescriptors;
+	winrt::com_ptr<ID3D12Resource> m_texture;
+
+	enum Descriptors
+	{
+		Cat,
+		Count
+	};
+
+	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+	DirectX::SimpleMath::Vector2 m_screenPos;
+	DirectX::SimpleMath::Vector2 m_origin;
 
 	// Rendering loop timer.
-	DX::StepTimer                               m_timer;
+	DX::StepTimer m_timer;
 
-	// If using the DirectX Tool Kit for DX12, uncomment this line:
-	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 };
