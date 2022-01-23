@@ -40,8 +40,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="cat.png">
+    <ImageContentTask Include="cat.png">
       <Filter>Resource Files</Filter>
-    </Image>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

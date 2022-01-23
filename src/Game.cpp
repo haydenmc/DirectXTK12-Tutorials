@@ -206,10 +206,10 @@ void Game::CreateDeviceDependentResources()
     m_resourceDescriptors = std::make_unique<DescriptorHeap>(device, Descriptors::Count);
     ResourceUploadBatch resourceUpload{ device };
     resourceUpload.Begin();
-    DX::ThrowIfFailed(CreateWICTextureFromFile(
+    DX::ThrowIfFailed(CreateDDSTextureFromFile(
         device,
         resourceUpload,
-        L"cat.png",
+        L"cat.dds",
         m_texture.put()
     ));
 
