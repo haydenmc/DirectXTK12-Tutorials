@@ -1,0 +1,11 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+    "name": "dx",
+    "version-semver": "0.0.1-alpha",
+    "dependencies": [
+        "spdlog",
+        "d3dx12",
+        "directxtk12",
+        "directxmath"
+    ]
+}
