@@ -62,8 +62,14 @@ private:
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 	DirectX::SimpleMath::Vector2 m_screenPos;
 	DirectX::SimpleMath::Vector2 m_origin;
+	DirectX::SimpleMath::Vector2 m_velocity;
 
 	// Rendering loop timer.
 	DX::StepTimer m_timer;
 
+	// Input
+	std::unique_ptr<DirectX::Keyboard> m_keyboard;
+	std::unique_ptr<DirectX::Mouse> m_mouse;
+	DirectX::Keyboard::KeyboardStateTracker m_keys;
+	DirectX::Mouse::ButtonStateTracker m_mouseButtons;
 };

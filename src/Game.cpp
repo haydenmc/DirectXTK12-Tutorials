@@ -7,6 +7,12 @@ using namespace DirectX;
 
 using Microsoft::WRL::ComPtr;
 
+namespace
+{
+    constexpr DirectX::SimpleMath::Vector2 GRAVITY_ACCELERATION{ 0.0f, 0.3f };
+    constexpr DirectX::SimpleMath::Vector2 JUMP_ACCELERATION{ 0.0f, -10.0f };
+}
+
 Game::Game()
 {
     m_deviceResources = std::make_unique<DX::DeviceResources>();
@@ -32,12 +38,9 @@ void Game::Initialize(HWND hwnd, uint32_t width, uint32_t height)
     m_deviceResources->CreateWindowSizeDependentResources();
     CreateWindowSizeDependentResources();
 
-    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-    // e.g. for 60 FPS fixed timestep update logic, call:
-    /*
-    m_timer.SetFixedTimeStep(true);
-    m_timer.SetTargetElapsedSeconds(1.0 / 60);
-    */
+    m_keyboard = std::make_unique<Keyboard>();
+    m_mouse = std::make_unique<Mouse>();
+    m_mouse->SetWindow(hwnd);
 }
 
 #pragma region Frame Update
@@ -57,10 +60,21 @@ void Game::Update(DX::StepTimer const& timer)
 {
     PIXBeginEvent(PIX_COLOR_DEFAULT, L"Update");
 
-    float elapsedTime = float(timer.GetElapsedSeconds());
+    double elapsedTime{ timer.GetElapsedSeconds() };
 
-    // TODO: Add your game logic here.
-    elapsedTime;
+    // Process input
+    auto kb{ m_keyboard->GetState() };
+    m_keys.Update(kb);
+    auto mouse{ m_mouse->GetState() };
+    m_mouseButtons.Update(mouse);
+
+    // Apply movement to the character
+    m_velocity += GRAVITY_ACCELERATION;
+    if (m_keys.pressed.Space || (m_mouseButtons.leftButton == Mouse::ButtonStateTracker::PRESSED))
+    {
+        m_velocity = JUMP_ACCELERATION;
+    }
+    m_screenPos += m_velocity;
 
     PIXEndEvent();
 }
@@ -75,8 +89,6 @@ void Game::Render()
     {
         return;
     }
-
-    float time{ static_cast<float>(m_timer.GetTotalSeconds()) };
 
     // Prepare the command list to render a new frame.
     m_deviceResources->Prepare();
@@ -95,7 +107,7 @@ void Game::Render()
         m_screenPos,
         nullptr,
         Colors::White,
-        cosf(time) * 4.f,
+        0.f,
         m_origin
     );
     m_spriteBatch->End();
@@ -179,8 +191,7 @@ void Game::OnWindowSizeChanged(uint32_t width, uint32_t height)
 // Properties
 std::tuple<uint32_t, uint32_t> Game::GetDefaultSize() const noexcept
 {
-    // TODO: Change to desired default window size (note minimum size is 320x200).
-    return { 800, 600 };
+    return { 1280, 720 };
 }
 #pragma endregion
 
